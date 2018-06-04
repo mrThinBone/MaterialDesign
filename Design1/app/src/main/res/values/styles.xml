@@ -8,4 +8,28 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Widget"/>
+
+    <style name="Widget.Size">
+        <item name="android:layout_width">@dimen/product_color_size</item>
+        <item name="android:layout_height">@dimen/product_color_size</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@drawable/bg_circle_size</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Widget.Color">
+        <item name="android:layout_width">@dimen/product_color_size</item>
+        <item name="android:layout_height">@dimen/product_color_size</item>
+    </style>
+    
+    <style name="Widget.RectangleDate">
+        <item name="android:minWidth">75dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_square_date</item>
+        <item name="android:textColor">@color/blue_grey_400</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/spacing_medium</item>
+    </style>
 </resources>

@@ -13,6 +13,8 @@ import com.example.android.design1.model.Product
 
 class ProductAdapter(private val products: List<Product>): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
+    fun product(pos: Int): Product = products[pos]
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false)
         return ViewHolder(view)
