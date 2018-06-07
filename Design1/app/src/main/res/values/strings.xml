@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Design1</string>
+    <string name="book">Book</string>
+    <string name="go">Go</string>
+    <string name="label_size">Size</string>
+    <string name="label_color">Colour</string>
+    <string name="label_time">Time</string>
+    <string name="label_date">Date</string>
+    <string name="label_pref_date">Preferred date</string>
+    <string name="label_pref_time">Preferred time</string>
+    
+    <string name="date_option1">Today\n02</string>
+    <string name="date_option2">Tomorrow\n03</string>
+    <string name="date_option3">Tuesday\n04</string>
+
+    <string name="time_option1">PM\n1&#8211;2</string>
+    <string name="time_option2">PM\n2&#8211;3</string>
+    <string name="time_option3">PM\n3&#8211;4</string>
 </resources>

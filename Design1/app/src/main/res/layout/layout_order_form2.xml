@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:text="@string/label_pref_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/a_six_value"
+        style="@style/Widget.RectangleDate"
+        android:text="@string/date_option1"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintEnd_toStartOf="@+id/a_seven_value"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        android:tag="o1" />
+
+    <TextView
+        android:id="@+id/a_seven_value"
+        style="@style/Widget.RectangleDate"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:text="@string/date_option2"
+        app:layout_constraintEnd_toStartOf="@+id/a_eight_value"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/a_six_value"
+        app:layout_constraintTop_toTopOf="@+id/a_six_value"
+        android:tag="o1" />
+
+    <TextView
+        android:id="@+id/a_eight_value"
+        style="@style/Widget.RectangleDate"
+        android:text="@string/date_option3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/a_seven_value"
+        app:layout_constraintTop_toTopOf="@+id/a_seven_value"
+        android:tag="o1" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:text="@string/label_pref_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/a_six_value" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/Widget.RectangleDate"
+        android:text="@string/time_option1"
+        android:layout_marginTop="@dimen/spacing_large"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        android:tag="o2"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/Widget.RectangleDate"
+        android:text="@string/time_option2"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_medium"
+        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        android:tag="o2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/Widget.RectangleDate"
+        android:text="@string/time_option3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        android:tag="o2" />
+
+</android.support.constraint.ConstraintLayout>
