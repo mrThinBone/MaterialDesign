@@ -17,7 +17,6 @@ import com.example.android.myinstagram.model.FeedItem
 class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     private var listener: FeedActionListener? = null
-    private val itemAnimator = FeedItemAnimator()
 
     fun updateFeed(animation: Boolean) {
         feedItems.clear()
@@ -90,6 +89,8 @@ class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHold
             val id = view.id
             if(id == R.id.like) {
                 listener?.like(this, adapterPosition)
+            } else if(id == R.id.comment) {
+                listener?.comment(this, adapterPosition)
             }
         }
     }

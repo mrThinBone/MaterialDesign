@@ -1,5 +1,6 @@
 package com.example.android.myinstagram
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +18,7 @@ class HomeActivity : AppCompatActivity(), FeedActionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        setSupportActionBar(toolbar)
 
         feedAdapter = FeedAdapter(resources)
         feedAdapter?.setActionListener(this)
@@ -42,7 +44,7 @@ class HomeActivity : AppCompatActivity(), FeedActionListener {
     }
 
     override fun comment(view: FeedAdapter.FeedViewHolder?, pos: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        startActivity(Intent(this, CommentActivity::class.java))
     }
 
     override fun more(view: FeedAdapter.FeedViewHolder?, pos: Int) {
