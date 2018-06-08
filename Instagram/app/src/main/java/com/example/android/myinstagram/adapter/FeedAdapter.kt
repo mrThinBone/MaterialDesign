@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextSwitcher
 import android.widget.TextView
 import com.example.android.myinstagram.FeedActionListener
-import com.example.android.myinstagram.FeedItemAnimator
+import com.example.android.myinstagram.anim.FeedItemAnimator
 import com.example.android.myinstagram.R
 import com.example.android.myinstagram.model.FeedItem
 
@@ -19,13 +19,29 @@ class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHold
     private var listener: FeedActionListener? = null
     private val itemAnimator = FeedItemAnimator()
 
+    fun updateFeed(animation: Boolean) {
+        feedItems.clear()
+        if(animation) {
+            var index = 0
+            feedData.forEach {
+                feedItems.add(it)
+                notifyItemInserted(index++)
+            }
+        } else {
+            feedItems.addAll(feedData)
+            notifyDataSetChanged()
+        }
+
+    }
+
     fun setActionListener(l: FeedActionListener) {
         listener = l
     }
 
     fun item(pos: Int): FeedItem = feedItems[pos]
 
-    private val feedItems = listOf(
+    private val feedItems = ArrayList<FeedItem>()
+    private val feedData = listOf(
             FeedItem(R.drawable.img_feed_center_1, res.getString(R.string.caption1), 33),
             FeedItem(R.drawable.img_feed_center_2, res.getString(R.string.caption2), 1),
             FeedItem(R.drawable.img_feed_center_1, res.getString(R.string.caption1), 223),
@@ -48,10 +64,12 @@ class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHold
 
     inner class FeedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
-        private val vLikeCount = itemView.findViewById<TextSwitcher>(R.id.like_count)
-        private val vImage = itemView.findViewById<ImageView>(R.id.image)
-        private val vCaption = itemView.findViewById<TextView>(R.id.caption)
-        private val vBtnLike = itemView.findViewById<ImageView>(R.id.like)
+        val vLikeCount = itemView.findViewById<TextSwitcher>(R.id.like_count)
+        val vImage = itemView.findViewById<ImageView>(R.id.image)
+        val vCaption = itemView.findViewById<TextView>(R.id.caption)
+        val vBtnLike = itemView.findViewById<ImageView>(R.id.like)
+        var feedItem: FeedItem? = null
+
         init {
             vBtnLike.setOnClickListener(this)
             itemView.findViewById<ImageView>(R.id.comment).setOnClickListener(this)
@@ -59,17 +77,13 @@ class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHold
         }
 
         fun bind(feed: FeedItem) {
+            feedItem = feed
             val likeCountStr = "${feed.likeCount} likes"
 
             vImage.setImageResource(feed.imgRes)
             vCaption.text = feed.caption
-            vLikeCount.setText(likeCountStr)
+            vLikeCount.setCurrentText(likeCountStr)
             vBtnLike.setImageResource(if(feed.liked) R.drawable.ic_heart_red else R.drawable.ic_heart_outline_grey)
-        }
-
-        fun animateLike(likeCount: Int) {
-            itemAnimator.animateHeartButton(vBtnLike, {})
-            itemAnimator.animateLikeCounter(vLikeCount, likeCount)
         }
 
         override fun onClick(view: View) {
