@@ -3,6 +3,7 @@ package com.example.android.design1
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetDialogFragment
+import android.support.transition.Scene
 import android.support.transition.Transition
 import android.support.transition.TransitionInflater
 import android.support.transition.TransitionManager
@@ -19,7 +20,7 @@ class FragmentOrderForm: BottomSheetDialogFragment(), View.OnClickListener {
 
     enum class STATE{STEP1, STEP2, LAST}
     private var mState: STATE = STATE.STEP1
-    private var mView: ViewGroup? = null
+    private var mContainer: ViewGroup? = null
     private var viewTransition: Transition? = null
 
     companion object {
@@ -33,16 +34,17 @@ class FragmentOrderForm: BottomSheetDialogFragment(), View.OnClickListener {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater.inflate(R.layout.fragment_order, container, false) as ViewGroup
-        return mView
+        val view = inflater.inflate(R.layout.fragment_order, container, false) as ViewGroup
+        mContainer = view.findViewById(R.id.main_container)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewTransition = TransitionInflater.from(context).inflateTransition(R.transition.transition_selected_view)
         viewTransition?.duration = 200
-        btn_submit.setOnClickListener{
-            if(mState == STATE.STEP1) stepForward()
+        btn_go.setOnClickListener{
+            stepForward()
         }
         six_value.setOnClickListener(this)
     }
@@ -52,6 +54,12 @@ class FragmentOrderForm: BottomSheetDialogFragment(), View.OnClickListener {
             switcher.showNext()
             mState = STATE.STEP2
             bindStep2()
+        } else if(mState == STATE.STEP2) {
+//            val confirmationView = layoutInflater.inflate(R.layout.layout_order_confirmation, mContainer, false)
+            val scene = Scene.getSceneForLayout(view as ViewGroup, R.layout.layout_order_confirmation, context!!)
+            val transition = TransitionInflater.from(context).inflateTransition(R.transition.transition_confirmation_view)
+            transition.duration = 3000
+            TransitionManager.go(scene, transition)
         }
     }
 
@@ -64,13 +72,13 @@ class FragmentOrderForm: BottomSheetDialogFragment(), View.OnClickListener {
     }
 
     private fun bindStep2() {
-        btn_submit.text = getString(R.string.book)
+        text_go.text = getString(R.string.order)
         option1_holder.text = getString(R.string.label_date)
         option2_holder.text = getString(R.string.label_time)
     }
 
     private fun bindStep1() {
-        btn_submit.text = getString(R.string.go)
+        text_go.text = getString(R.string.go)
         option1_holder.text = getString(R.string.label_size)
         option2_holder.text = getString(R.string.label_color)
     }
@@ -82,10 +90,10 @@ class FragmentOrderForm: BottomSheetDialogFragment(), View.OnClickListener {
     private fun onOptionSelected(view: View) {
 //        Toast.makeText(activity, "clicked", Toast.LENGTH_SHORT).show()
         val cloneView: View = if(view is TextView) cloneTextView(view) else cloneCircleColor(view)
-        mView?.addView(cloneView)
+        mContainer?.addView(cloneView)
         cloneView.post{
 
-            TransitionManager.beginDelayedTransition(mView!!, viewTransition)
+            TransitionManager.beginDelayedTransition(mContainer!!, viewTransition)
             cloneView.layoutParams = option1LayoutParams()
         }
     }
