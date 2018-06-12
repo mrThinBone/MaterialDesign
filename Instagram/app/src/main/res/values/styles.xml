@@ -28,5 +28,9 @@
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="android:textSize">14sp</item>
     </style>
+    
+    <style name="AppTheme.SendButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:colorButtonNormal">@color/btn_send_pressed</item>
+    </style>
 
 </resources>

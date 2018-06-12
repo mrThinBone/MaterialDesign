@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PlayPauseStopState">
+        <attr name="state_send" format="boolean"/>
+        <attr name="state_loading" format="boolean"/>
+        <attr name="state_done" format="boolean"/>
+    </declare-styleable>
+</resources>
