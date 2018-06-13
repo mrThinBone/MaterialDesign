@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.example.android.myinstagram.adapter.FeedAdapter
 import com.example.android.myinstagram.anim.FeedItemAnimator
 import com.example.android.myinstagram.anim.IntroAnimator
+import com.example.android.myinstagram.widget.FeedContextMenuMgr
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity(), FeedActionListener {
@@ -25,6 +27,11 @@ class HomeActivity : AppCompatActivity(), FeedActionListener {
 
         feed_list.layoutManager = LinearLayoutManager(this)
         feed_list.itemAnimator = FeedItemAnimator()
+        feed_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                FeedContextMenuMgr.Singleton.instance.onScrolled(recyclerView, dx, dy)
+            }
+        })
         feed_list.adapter = feedAdapter
 
         appbar.setExpanded(false)
@@ -35,7 +42,7 @@ class HomeActivity : AppCompatActivity(), FeedActionListener {
         }, 100)
     }
 
-    override fun like(viewHolder: FeedAdapter.FeedViewHolder?, pos: Int) {
+    override fun like(view: View?, pos: Int) {
         val feedItem = feedAdapter?.item(pos)
         if(feedItem != null && !feedItem.liked) {
             feedItem.like()
@@ -43,23 +50,19 @@ class HomeActivity : AppCompatActivity(), FeedActionListener {
         }
     }
 
-    override fun comment(view: FeedAdapter.FeedViewHolder?, pos: Int) {
+    override fun comment(view: View?, pos: Int) {
         startActivity(Intent(this, CommentActivity::class.java))
     }
 
-    override fun more(view: FeedAdapter.FeedViewHolder?, pos: Int) {
+    override fun report(view: View?, pos: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun report(view: FeedAdapter.FeedViewHolder?, pos: Int) {
+    override fun share(view: View?, pos: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun share(view: FeedAdapter.FeedViewHolder?, pos: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun copyURL(view: FeedAdapter.FeedViewHolder?, pos: Int) {
+    override fun copyURL(view: View?, pos: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

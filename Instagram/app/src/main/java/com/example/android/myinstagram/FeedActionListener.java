@@ -1,14 +1,13 @@
 package com.example.android.myinstagram;
 
-import com.example.android.myinstagram.adapter.FeedAdapter;
+import android.view.View;
 
 public interface FeedActionListener {
 
-    void like(FeedAdapter.FeedViewHolder viewHolder, int pos);
-    void comment(FeedAdapter.FeedViewHolder view, int pos);
-    void more(FeedAdapter.FeedViewHolder view, int pos);
-    void report(FeedAdapter.FeedViewHolder view, int pos);
-    void share(FeedAdapter.FeedViewHolder view, int pos);
-    void copyURL(FeedAdapter.FeedViewHolder view, int pos);
+    void like(View view, int pos);
+    void comment(View view, int pos);
+    void report(View view, int pos);
+    void share(View view, int pos);
+    void copyURL(View view, int pos);
 
 }

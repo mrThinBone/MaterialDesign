@@ -10,9 +10,9 @@ import android.widget.ImageView
 import android.widget.TextSwitcher
 import android.widget.TextView
 import com.example.android.myinstagram.FeedActionListener
-import com.example.android.myinstagram.anim.FeedItemAnimator
 import com.example.android.myinstagram.R
 import com.example.android.myinstagram.model.FeedItem
+import com.example.android.myinstagram.widget.FeedContextMenuMgr
 
 class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
@@ -72,7 +72,7 @@ class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHold
         init {
             vBtnLike.setOnClickListener(this)
             itemView.findViewById<ImageView>(R.id.comment).setOnClickListener(this)
-            itemView.findViewById<ImageView>(R.id.more).setOnClickListener({})
+            itemView.findViewById<ImageView>(R.id.more).setOnClickListener(this)
         }
 
         fun bind(feed: FeedItem) {
@@ -87,10 +87,14 @@ class FeedAdapter(res: Resources): RecyclerView.Adapter<FeedAdapter.FeedViewHold
 
         override fun onClick(view: View) {
             val id = view.id
-            if(id == R.id.like) {
-                listener?.like(this, adapterPosition)
-            } else if(id == R.id.comment) {
-                listener?.comment(this, adapterPosition)
+            when (id) {
+                R.id.like -> listener?.like(itemView, adapterPosition)
+                R.id.comment -> listener?.comment(itemView, adapterPosition)
+                R.id.more -> FeedContextMenuMgr.Singleton.instance.toggleContextMenu(view, this)
+                R.id.btn_report -> FeedContextMenuMgr.Singleton.instance.hideContextMenu()
+                R.id.btn_share_photo -> FeedContextMenuMgr.Singleton.instance.hideContextMenu()
+                R.id.btn_copy_share_url -> FeedContextMenuMgr.Singleton.instance.hideContextMenu()
+                R.id.btn_cancel -> FeedContextMenuMgr.Singleton.instance.hideContextMenu()
             }
         }
     }
