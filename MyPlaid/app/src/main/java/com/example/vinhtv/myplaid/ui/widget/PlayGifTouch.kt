@@ -21,7 +21,7 @@ class PlayGifTouch: View.OnTouchListener {
         else if(drawable is TransitionDrawable) {
             // we fade in images on load which uses a TransitionDrawable; check its layers
             val fadingIn: TransitionDrawable = drawable
-            for (i in 0..fadingIn.numberOfLayers) {
+            for (i in 0 until fadingIn.numberOfLayers) {
                 if(fadingIn.getDrawable(i) is GifDrawable) {
                     gif = fadingIn.getDrawable(i) as GifDrawable
                     break

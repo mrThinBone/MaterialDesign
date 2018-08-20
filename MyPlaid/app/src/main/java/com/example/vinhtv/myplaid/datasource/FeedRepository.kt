@@ -28,7 +28,7 @@ class FeedRepository {
     }
 
     fun fetch(): List<Shot>? {
-        val request = dribbleService.search("Material Design", 1, 12, "latest")
+        val request = dribbleService.search("Material Design", 1, 7, "latest")
         val response = request.execute()
         if(response.isSuccessful) {
             return response.body()

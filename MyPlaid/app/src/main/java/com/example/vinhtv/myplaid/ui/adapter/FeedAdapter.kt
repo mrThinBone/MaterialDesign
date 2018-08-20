@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.animation.addListener
@@ -13,6 +14,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.example.vinhtv.myplaid.R
 import com.example.vinhtv.myplaid.ext.DribbleTarget
 import com.example.vinhtv.myplaid.ui.model.Feed
 import com.example.vinhtv.myplaid.ui.widget.BadgedFourThreeImageView
@@ -25,19 +27,25 @@ class FeedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val feeds: ArrayList<Feed> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return ItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_feed, parent, false))
     }
 
     override fun getItemCount() = feeds.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        (holder as ItemViewHolder).bind(feeds[position])
     }
 
-    class ItemViewHolder: RecyclerView.ViewHolder {
-        lateinit var image: BadgedFourThreeImageView
-        constructor(itemView: View): super(itemView) {
-            image = itemView as BadgedFourThreeImageView
+    fun add(data: List<Feed>) {
+        feeds.addAll(data)
+        notifyDataSetChanged()
+    }
+
+    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val image: BadgedFourThreeImageView = itemView as BadgedFourThreeImageView
+
+        init {
             itemView.setOnTouchListener(PlayGifTouch())
             itemView.setOnClickListener{  }
         }
